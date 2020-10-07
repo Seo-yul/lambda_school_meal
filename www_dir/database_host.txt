@@ -1,1 +1,0 @@
-mongodb+srv://reso:1q2w3e4r@reso.ympo0.mongodb.net/test_datab?retryWrites=true&w=majority
