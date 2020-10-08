@@ -1,5 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,venv,pycharm
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,venv,pycharm
+DBmanager.py
 .idea/
 ### Django ###
 *.log
