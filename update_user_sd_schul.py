@@ -78,8 +78,10 @@ def lambda_handler(event, context):
     try:
         user_id = event['userRequest']['user']['id']
         params = event['action']['params']
-        schul_nm = params['SchulNm']
+        schul_grade = params['SchulGrade']
+        schul_nm = params['SchulNm'] + schul_grade
 
+        print(schul_nm)
         msg = '먼저 지역을 등록해 주세요'
         user_info_dict = list(get_user_info(user_id))[0]
         atpt_ofcdc_sc_code = user_info_dict['ATPT_OFCDC_SC_CODE']
@@ -89,20 +91,13 @@ def lambda_handler(event, context):
         sd_schul_code = sc_data_list['SD_SCHUL_CODE']
 
         if not user_info_dict.get('SCHUL_NM'):
-            sql_query = {
-                'user_id': user_id,
-                'SCHUL_NM': schul_nm,
-                'SD_SCHUL_CODE': sd_schul_code
-            }
-            USER_INFO.add_user_info_to_collection(sql_query)
             msg = '학교를 등록하였습니다.'
 
         else:
-            sql_query_0 = {'user_id': user_id}
-            sql_query_1 = {'$set': {'SCHUL_NM': schul_nm, 'SD_SCHUL_CODE': sd_schul_code}}
-            USER_INFO.update_user_info_to_collection(sql_query_0, sql_query_1)
             msg = '학교를 변경하였습니다.'
-
+        sql_query_0 = {'user_id': user_id}
+        sql_query_1 = {'$set': {'SCHUL_NM': schul_nm, 'SD_SCHUL_CODE': sd_schul_code}}
+        USER_INFO.update_user_info_to_collection(sql_query_0, sql_query_1)
     except Exception as e:
         print('에러발생', e)
 

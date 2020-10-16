@@ -78,7 +78,7 @@ def lambda_handler(event, context):
         meal_list = mi.get_meal_data_list()
 
         for data in meal_list:
-            msg += data['MMEAL_SC_NM'] + '<br/>'
+            msg += data['MMEAL_SC_NM'] + '\n'
             msg += data['DDISH_NM']
     except Exception as e:
         print(e)
